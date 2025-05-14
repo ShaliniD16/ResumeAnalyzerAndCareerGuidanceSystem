@@ -1,0 +1,23 @@
+# Ignore the virtual environment folder inside ResumeAI
+ResumeAI/venv/
+
+# Python cache and bytecode
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# DLL, LIB, EXE - large compiled binaries
+*.dll
+*.lib
+*.exe
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# VS Code and IDE settings (optional)
+.vscode/
+.idea/
+
+# Environment files (optional)
+.env

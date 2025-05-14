@@ -1,0 +1,484 @@
+/* CareerGuidance.css */
+
+.career-guidance-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.career-guidance-container h2 {
+  color: #2d3748;
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+/* Form Styles */
+.career-form {
+  background-color: #f7fafc;
+  border-radius: 10px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: #4a5568;
+}
+
+.form-group input, .form-group select {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+.form-group input:focus, .form-group select:focus {
+  outline: none;
+  border-color: #3182ce;
+  box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.1);
+}
+
+.form-row {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.form-group.half {
+  flex: 1;
+  margin-bottom: 0;
+}
+
+.submit-btn {
+  display: block;
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #4299e1;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.submit-btn:hover {
+  background-color: #3182ce;
+}
+
+.submit-btn:disabled {
+  background-color: #a0aec0;
+  cursor: not-allowed;
+}
+
+/* Error message */
+.error-message {
+  background-color: #fed7d7;
+  color: #c53030;
+  padding: 1rem;
+  border-radius: 6px;
+  margin-bottom: 1.5rem;
+  font-weight: 500;
+}
+
+/* Results Container */
+.results-container {
+  background-color: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+/* Tabs */
+.tabs {
+  display: flex;
+  background-color: #f7fafc;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.tabs button {
+  padding: 1rem 1.5rem;
+  background: none;
+  border: none;
+  font-weight: 600;
+  color: #718096;
+  cursor: pointer;
+  position: relative;
+  transition: color 0.2s;
+}
+
+.tabs button:hover {
+  color: #4299e1;
+}
+
+.tabs button.active {
+  color: #3182ce;
+}
+
+.tabs button.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background-color: #3182ce;
+}
+
+/* Tab Content */
+.tab-content {
+  padding: 2rem;
+}
+
+.tab-content h3 {
+  margin-top: 0;
+  color: #2d3748;
+  margin-bottom: 1.5rem;
+}
+
+/* Career Sections */
+.career-section, .skills-section, .resource-section {
+  margin-bottom: 2rem;
+}
+
+.career-section h4, .skills-section h4, .resource-section h4 {
+  color: #4a5568;
+  border-bottom: 1px solid #e2e8f0;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+/* Card Container */
+.card-container, .resource-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1rem;
+}
+
+/* Role Cards */
+.role-card {
+  background-color: #f7fafc;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.role-card h5 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  color: #2d3748;
+}
+
+.confidence {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.progress-bar {
+  height: 8px;
+  background-color: #edf2f7;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progress {
+  height: 100%;
+  background-color: #4299e1;
+}
+
+/* Skills Tags */
+.skills-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.skill-tag {
+  background-color: #ebf8ff;
+  color: #2b6cb0;
+  border-radius: 16px;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.skill-tag.high {
+  background-color: #e6fffa;
+  color: #2c7a7b;
+}
+
+.skill-tag.medium {
+  background-color: #ebf8ff;
+  color: #2b6cb0;
+}
+
+.skill-tag.low {
+  background-color: #f7fafc;
+  color: #4a5568;
+}
+
+.priority-indicator {
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  padding: 0.2rem 0.5rem;
+  font-size: 0.75rem;
+}
+
+/* Resource Cards */
+.resource-category {
+  margin-bottom: 1.5rem;
+}
+
+.resource-category h5 {
+  color: #4a5568;
+  margin-bottom: 1rem;
+}
+
+.resource-card {
+  background-color: #f7fafc;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+}
+
+.resource-card h6 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  color: #2d3748;
+  font-size: 1rem;
+}
+
+.provider {
+  color: #718096;
+  font-size: 0.875rem;
+  margin-bottom: 1rem;
+}
+
+.resource-details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+  font-size: 0.875rem;
+}
+
+.resource-cost, .resource-duration, .resource-rating, .resource-format, .resource-type {
+  background-color: #edf2f7;
+  border-radius: 4px;
+  padding: 0.25rem 0.5rem;
+  color: #4a5568;
+}
+
+.resource-link {
+  margin-top: auto;
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background-color: #4299e1;
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  text-align: center;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.resource-link:hover {
+  background-color: #3182ce;
+}
+
+/* Development Plan */
+.plan-summary {
+  background-color: #f7fafc;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.plan-summary-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.plan-summary-item .label {
+  font-size: 0.875rem;
+  color: #718096;
+  margin-bottom: 0.25rem;
+}
+
+.plan-summary-item .value {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #2d3748;
+}
+
+/* Timeline */
+.timeline {
+  margin-bottom: 2rem;
+}
+
+.timeline h4 {
+  color: #4a5568;
+  border-bottom: 1px solid #e2e8f0;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.timeline-container {
+  position: relative;
+  padding-left: 2rem;
+}
+
+.timeline-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 8px;
+  width: 2px;
+  background-color: #e2e8f0;
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 2rem;
+}
+
+.timeline-marker {
+  position: absolute;
+  top: 0;
+  left: -2rem;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: #4299e1;
+  border: 3px solid #ebf8ff;
+  z-index: 1;
+}
+
+.timeline-content {
+  background-color: #f7fafc;
+  border-radius: 8px;
+  padding: 1.5rem;
+}
+
+.timeline-content h5 {
+  margin-top: 0;
+  color: #2d3748;
+  margin-bottom: 1rem;
+}
+
+.timeline-goals, .timeline-metrics {
+  margin-bottom: 1rem;
+}
+
+.timeline-goals h6, .timeline-metrics h6 {
+  color: #4a5568;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.timeline-goals ul, .timeline-metrics ul {
+  padding-left: 1.5rem;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.timeline-goals li, .timeline-metrics li {
+  margin-bottom: 0.5rem;
+}
+
+/* Plan Strategies */
+.plan-strategies {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .plan-strategies {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.strategy-section {
+  background-color: #f7fafc;
+  border-radius: 8px;
+  padding: 1.5rem;
+}
+
+.strategy-section h4 {
+  color: #2d3748;
+  margin-top: 0;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid #e2e8f0;
+  padding-bottom: 0.5rem;
+}
+
+.strategy-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.strategy-subsection h5 {
+  color: #4a5568;
+  margin-top: 0;
+  margin-bottom: 0.75rem;
+  font-size: 0.95rem;
+}
+
+.strategy-subsection ul {
+  padding-left: 1.5rem;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.strategy-subsection li {
+  margin-bottom: 0.5rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .form-row {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  .tabs {
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+  
+  .tabs button {
+    padding: 1rem;
+    font-size: 0.9rem;
+  }
+  
+  .card-container, .resource-cards {
+    grid-template-columns: 1fr;
+  }
+  
+  .plan-summary {
+    grid-template-columns: 1fr;
+  }
+}

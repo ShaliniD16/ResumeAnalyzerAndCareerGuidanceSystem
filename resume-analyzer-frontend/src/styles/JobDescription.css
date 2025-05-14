@@ -1,0 +1,16 @@
+.job-description {
+    background: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .job-description h2 {
+    color: #8e44ad;
+  }
+  
+  .job-description p {
+    line-height: 1.5;
+    font-size: 1.1rem;
+  }
+  

@@ -1,0 +1,34 @@
+.profile {
+    text-align: center;
+    padding: 40px;
+    animation: slideIn 1s ease-in-out;
+  }
+  
+  .profile-card {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+    display: inline-block;
+    text-align: left;
+  }
+  
+  .profile h1 {
+    color: #444;
+  }
+  
+  .profile ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .profile li {
+    padding: 5px;
+    font-size: 1rem;
+  }
+  
+  @keyframes slideIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  

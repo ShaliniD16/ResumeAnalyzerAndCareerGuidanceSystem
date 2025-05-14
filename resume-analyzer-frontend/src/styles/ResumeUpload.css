@@ -1,0 +1,213 @@
+/* .resume-upload {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  } */
+  
+  .upload-btn {
+    background: #3498db;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  .upload-btn:hover {
+    background: #2980b9;
+  }
+  /* Modern File Upload with Drag & Drop */
+.resume-upload {
+  background: white;
+  padding: 40px;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  max-width: 800px;
+  margin: 40px auto;
+  transition: all 0.3s ease;
+}
+
+.resume-upload h2 {
+  margin-bottom: 30px;
+  color: #333;
+  position: relative;
+  display: inline-block;
+  padding-bottom: 10px;
+}
+
+.resume-upload h2::after {
+  content: '';
+  position: absolute;
+  width: 50%;
+  height: 3px;
+}
+
+/* Section Headers */
+.analysis-results h3,
+.result-section h4,
+.result-section h5 {
+  margin-top: 30px;
+  color: #2c3e50;
+  text-align: left;
+}
+
+/* Card Layout */
+.result-section {
+  background: #f9f9f9;
+  border-radius: 12px;
+  padding: 20px;
+  margin-top: 20px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease;
+}
+
+.result-section:hover {
+  transform: scale(1.01);
+}
+
+/* Score Indicator */
+.score-indicator,
+.skills-metrics,
+.grammar-metrics,
+.readability-metrics {
+  display: flex;
+  gap: 20px;
+  margin-top: 15px;
+  flex-wrap: wrap;
+}
+
+.score-label,
+.metric-label {
+  font-weight: bold;
+  color: #555;
+}
+
+.score-value,
+.metric-value {
+  font-size: 18px;
+}
+
+.score {
+  padding: 5px 10px;
+  border-radius: 6px;
+  font-weight: bold;
+}
+
+.score.good {
+  background-color: #e0f8e9;
+  color: #2ecc71;
+}
+
+.score.average {
+  background-color: #fef3c7;
+  color: #f39c12;
+}
+
+.score.poor {
+  background-color: #fdecea;
+  color: #e74c3c;
+}
+
+/* Keyword Cards */
+.keywords-section,
+.skills-breakdown {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.keyword-group,
+.skill-group {
+  background: #ffffff;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+}
+
+.keyword-label,
+.skill-label {
+  font-weight: bold;
+  margin-bottom: 6px;
+  color: #2c3e50;
+}
+
+.keyword-value,
+.skill-value {
+  font-style: italic;
+}
+
+.keyword-value.matched,
+.skill-value.matched {
+  color: #27ae60;
+}
+
+.keyword-value.fuzzy {
+  color: #f39c12;
+}
+
+.keyword-value.missing,
+.skill-value.missing {
+  color: #e74c3c;
+}
+
+/* Grammar List */
+.grammar-errors {
+  margin-top: 20px;
+}
+
+.errors-list {
+  list-style: none;
+  padding-left: 0;
+}
+
+.error-item {
+  background: #fff;
+  border-left: 4px solid #e74c3c;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.error-suggestion {
+  margin-top: 5px;
+  font-size: 14px;
+  color: #3498db;
+}
+
+.more-errors {
+  font-style: italic;
+  color: #888;
+}
+
+/* Tips Section */
+.improvement-tips {
+  margin-top: 30px;
+  background: #eef6fa;
+  padding: 20px;
+  border-left: 6px solid #3498db;
+  border-radius: 10px;
+  font-size: 16px;
+}
+
+.improvement-tips ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.improvement-tips li {
+  margin-bottom: 10px;
+}
+
+/* Responsive Tweaks */
+@media (max-width: 768px) {
+  .keywords-section,
+  .skills-breakdown {
+    grid-template-columns: 1fr;
+  }
+}
