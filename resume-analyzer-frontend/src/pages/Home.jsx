@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-// import { useAuth } from "../contexts/AuthContext"; // Import if you implemented the AuthContext
+// import { useAuth } from "../contexts/AuthContext"; 
 import "../assets/styles.css";
 import "./../styles/Home.css";
 import ResumeAnalysisIllustration from "../components/ResumeAnalysisIllustration";
 
 const Home = () => {
   const [activeFeature, setActiveFeature] = useState(0);
-  // If you're using AuthContext, uncomment the next line
+ 
   // const { isLoggedIn } = useAuth();
   // Otherwise, use localStorage directly
   const isLoggedIn = Boolean(localStorage.getItem("token"));
@@ -16,7 +16,7 @@ const Home = () => {
     {
       title: "AI Resume Analysis",
       description: "Get detailed feedback on your resume content, format, and relevance to specific job postings.",
-      icon: "📝" // You can replace these with actual icons or SVGs
+      icon: "📝" 
     },
     {
       title: "Career Guidance",
@@ -39,17 +39,17 @@ const Home = () => {
     {
       quote: "ResumeAI helped me identify key gaps in my resume that were preventing me from getting interviews. After implementing the suggestions, I received three interview calls in just one week!",
       author: "Sarah J., Software Engineer",
-      image: "/api/placeholder/70/70" // Replace with actual profile image path
+      image: "/api/placeholder/70/70" 
     },
     {
       quote: "The mock interview feature was a game-changer. It helped me prepare for tough questions and build my confidence. I'm now working at my dream company!",
       author: "Michael T., Marketing Specialist",
-      image: "/api/placeholder/70/70" // Replace with actual profile image path
+      image: "/api/placeholder/70/70" 
     },
     {
       quote: "As a career switcher, I wasn't sure how to position my experience. The career guidance tool gave me actionable insights that helped me transition to UX design successfully.",
       author: "Rebecca L., UX Designer",
-      image: "/api/placeholder/70/70" // Replace with actual profile image path
+      image: "/api/placeholder/70/70" 
     }
   ];
 
@@ -62,7 +62,7 @@ const Home = () => {
 
   return (
     <div className="home-container">
-      {/* Hero Section - Added custom className for tighter layout */}
+     
       <section className="hero-section tight-hero">
         <div className="hero-content">
           <h1>Supercharge Your Job Search with AI</h1>
@@ -80,7 +80,7 @@ const Home = () => {
             )}
           </div>
         </div>
-        {/* Adjusted hero-image to have tighter layout */}
+        
         <div className="hero-image">
           <ResumeAnalysisIllustration />
         </div>
