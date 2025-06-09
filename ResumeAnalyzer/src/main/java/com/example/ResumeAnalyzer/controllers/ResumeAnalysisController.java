@@ -11,7 +11,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/analysis")
-//@CrossOrigin(origins = "*") // For development only - restrict in production
+//@CrossOrigin(origins = "*") 
 public class ResumeAnalysisController {
 
     @Autowired
