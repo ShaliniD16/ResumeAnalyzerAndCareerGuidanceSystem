@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom'; // ✅ useNavigate instead of useHistory
+import { useNavigate } from 'react-router-dom'; 
 
 const Register = () => {
   const [username, setUsername] = useState('');
@@ -9,7 +9,7 @@ const Register = () => {
   const [error, setError] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
 
-  const navigate = useNavigate(); // ✅ useNavigate hook
+  const navigate = useNavigate(); 
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -21,7 +21,7 @@ const Register = () => {
       });
       setSuccessMessage('Registration successful! Redirecting to login...');
       setTimeout(() => {
-        navigate('/login'); // ✅ navigate instead of history.push
+        navigate('/login');
       }, 2000);
     } catch (err) {
       setError('Error registering user. Please try again.');
