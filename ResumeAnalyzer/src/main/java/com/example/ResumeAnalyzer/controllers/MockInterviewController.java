@@ -14,7 +14,7 @@ import java.util.*;
 
 @RestController
 @RequestMapping("/api/interview")
-@CrossOrigin(origins = "*")  // Restrict in production
+@CrossOrigin(origins = "*") 
 public class MockInterviewController {
 
     @Value("${flask.api.url:http://localhost:5000/api/interview/analyze}")
