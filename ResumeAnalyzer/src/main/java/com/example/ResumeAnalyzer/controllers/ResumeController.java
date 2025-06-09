@@ -14,7 +14,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/resumes")
-@CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true") // For development only - restrict in production
+@CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true") 
 public class ResumeController {
 
     @Autowired
