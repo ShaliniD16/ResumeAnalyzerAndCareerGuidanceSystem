@@ -14,24 +14,24 @@ from flask import Flask, request, jsonify
 from fuzzywuzzy import fuzz
 from flask_cors import CORS
 
-# Import from local db module
+
 from db import fetch_resume
 
-# Download necessary NLTK resources
+
 nltk.download('punkt', quiet=True)
 
-# Initialize Flask app
+
 app = Flask(__name__)
 CORS(app)
 
-# Load model only once
+
 model = whisper.load_model("base")
 
-# Setup upload folder
+
 UPLOAD_FOLDER = 'uploads'
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
-# Enhanced Job Roles with More Comprehensive Skills
+
 JOB_ROLES = {
     "Software Engineer": {
         "primary_skills": {
@@ -169,13 +169,13 @@ JOB_ROLES = {
     }
 }
 
-# Load NLP models
+
 try:
     nlp = spacy.load("en_core_web_lg")
 except OSError:
     nlp = spacy.load("en_core_web_sm")
 
-# Career transition mapping
+
 CAREER_PATHS = {
     "Software Engineer": {
         "next_roles": ["Senior Software Engineer", "Tech Lead", "Backend Developer", "Full Stack Developer"],
@@ -204,11 +204,10 @@ CAREER_PATHS = {
             {"name": "Made with ML", "url": "https://madewithml.com/"}
         ]
     },
-    # Add more roles as needed...
+  
 }
 
 
-# Initialize grammar checking tool
 tool = language_tool_python.LanguageTool("en-US")
 
 
@@ -309,7 +308,6 @@ def analyze_skills(resume_text: str, job_role: str) -> Dict[str, Any]:
     if not resume_text:
         return {"error": "Resume text is missing"}
     
-    # Default to Software Engineer if job role is not recognized
     if job_role not in JOB_ROLES:
         closest_match = None
         highest_score = 0
@@ -361,7 +359,7 @@ def predict_career_path(job_role: str) -> Dict[str, Any]:
     if not job_role:
         return {"error": "Job role is missing"}
 
-    # Match closest job role from the known career paths
+   
     matched_role = None
     highest_score = 0
     for role in CAREER_PATHS.keys():
@@ -381,23 +379,11 @@ def predict_career_path(job_role: str) -> Dict[str, Any]:
         "learning_resources": path_info["learning_resources"]
     }
 def predict_next_roles(current_role, skills, years_experience=None, industry=None):
-    """
-    Predicts potential career progression paths based on current role, skills, experience, and industry.
-    
-    Args:
-        current_role (str): The user's current job title
-        skills (list): List of user's current skills
-        years_experience (int, optional): Years of experience in current role
-        industry (str, optional): User's industry sector
-        
-    Returns:
-        dict: Dictionary containing role categories and recommended next roles with confidence scores
-    """
+
     # Input validation
     if not current_role or not isinstance(skills, list) or len(skills) == 0:
         raise ValueError("Current role and at least one skill must be provided")
     
-    # Career path recommendations based on role, skills, experience and industry
     career_paths = {
         "vertical_progression": [],      # Same career track, higher positions
         "specialization_paths": [],      # Specialized versions of current role
@@ -405,9 +391,9 @@ def predict_next_roles(current_role, skills, years_experience=None, industry=Non
         "emerging_opportunities": []     # New roles based on skill alignment
     }
     
-    # Implement actual prediction logic here (simplified example)
+
     if "software" in current_role.lower() or any("program" in skill.lower() for skill in skills):
-        # Tech career paths
+      
         if years_experience and years_experience >= 3:
             career_paths["vertical_progression"] = [
                 {"role": f"Senior {current_role}", "confidence": 0.85},
@@ -420,7 +406,7 @@ def predict_next_roles(current_role, skills, years_experience=None, industry=Non
         ]
     
     elif "market" in current_role.lower():
-        # Marketing career paths
+     
         career_paths["vertical_progression"] = [
             {"role": f"Senior {current_role}", "confidence": 0.80},
             {"role": "Marketing Manager", "confidence": 0.70}
@@ -431,7 +417,7 @@ def predict_next_roles(current_role, skills, years_experience=None, industry=Non
             {"role": "Content Strategy Manager", "confidence": 0.65}
         ]
     
-    # Default fallback for any role type
+
     if not any(career_paths.values()):
         career_paths["vertical_progression"] = [
             {"role": f"Senior {current_role}", "confidence": 0.70},
@@ -442,24 +428,12 @@ def predict_next_roles(current_role, skills, years_experience=None, industry=Non
 
 
 def suggest_skills(target_roles, current_skills=None, industry=None):
-    """
-    Suggests skills to develop based on target roles and current skill gaps.
-    
-    Args:
-        target_roles (list): List of target job roles
-        current_skills (list, optional): List of user's current skills for gap analysis
-        industry (str, optional): User's industry sector for context
-        
-    Returns:
-        dict: Dictionary of skill categories and recommended skills with priority levels
-    """
-    # Input validation
+ 
     if not target_roles or not isinstance(target_roles, list):
         raise ValueError("Target roles must be provided as a list")
     
     current_skills = current_skills or []
     
-    # Define skill recommendations by category
     skill_recommendations = {
         "technical_skills": [],
         "soft_skills": [],
@@ -467,11 +441,11 @@ def suggest_skills(target_roles, current_skills=None, industry=None):
         "emerging_skills": []
     }
     
-    # Example implementation (would use more sophisticated logic in production)
+
     for role in target_roles:
         role_lower = role.lower()
         
-        # Technical skills based on role
+
         if "software" in role_lower or "developer" in role_lower:
             if "Python" not in current_skills:
                 skill_recommendations["technical_skills"].append({
@@ -492,7 +466,7 @@ def suggest_skills(target_roles, current_skills=None, industry=None):
                 "relevance_score": 0.7
             })
         
-        # Management skills for leadership roles
+
         if "lead" in role_lower or "manager" in role_lower or "senior" in role_lower:
             skill_recommendations["soft_skills"].append({
                 "skill": "Team Leadership",
@@ -512,7 +486,7 @@ def suggest_skills(target_roles, current_skills=None, industry=None):
                 "relevance_score": 0.65
             })
         
-        # Default skills for any role
+
         if not any(skill_recommendations.values()):
             skill_recommendations["soft_skills"].append({
                 "skill": "Communication",
@@ -530,25 +504,13 @@ def suggest_skills(target_roles, current_skills=None, industry=None):
 
 
 def get_learning_resources(skills, learning_style=None, max_budget=None, time_frame=None):
-    """
-    Provides personalized learning resources based on skills, learning preferences, and constraints.
-    
-    Args:
-        skills (list): Skills the user wants to learn
-        learning_style (str, optional): User's preferred learning method (video, reading, interactive)
-        max_budget (float, optional): Maximum budget for learning resources
-        time_frame (str, optional): User's time frame for learning (quick, comprehensive)
-        
-    Returns:
-        dict: Dictionary of skill-specific resources categorized by type
-    """
-    # Input validation
+
     if not skills or not isinstance(skills, list):
         raise ValueError("At least one skill must be provided")
     
     resources_by_skill = {}
     
-    # Generate resources for each skill
+
     for skill in skills:
         resources = {
             "courses": [],
@@ -559,8 +521,7 @@ def get_learning_resources(skills, learning_style=None, max_budget=None, time_fr
         }
         
         skill_lower = skill.lower()
-        
-        # Populate resources based on skill type
+
         if "python" in skill_lower or "programming" in skill_lower:
             resources["courses"] = [
                 {
@@ -651,7 +612,7 @@ def get_learning_resources(skills, learning_style=None, max_budget=None, time_fr
                 }
             ]
         
-        # Default resources for any skill
+
         else:
             resources["courses"] = [
                 {
@@ -683,8 +644,7 @@ def get_learning_resources(skills, learning_style=None, max_budget=None, time_fr
                     "type": "professional network"
                 }
             ]
-        
-        # Filter resources based on user preferences
+
         if learning_style:
             for category in resources:
                 resources[category] = [r for r in resources[category] 
@@ -700,29 +660,15 @@ def get_learning_resources(skills, learning_style=None, max_budget=None, time_fr
     return resources_by_skill
 
 def create_career_development_plan(current_role, target_role, current_skills, timeline="6 months"):
-    """
-    Creates a personalized career development plan with milestones and action items.
-    
-    Args:
-        current_role (str): User's current job title
-        target_role (str): User's target job title
-        current_skills (list): List of user's current skills
-        timeline (str, optional): Desired timeline for transition
-        
-    Returns:
-        dict: Complete career development plan with milestones and action items
-    """
-    # Input validation
+
     if not current_role or not target_role or not current_skills:
         raise ValueError("Current role, target role, and current skills must be provided")
-    
-    # Determine skills gap
+
     target_skills = suggest_skills([target_role], current_skills)
     
-    # Create timeline based on skill acquisition needs
+
     months_available = int(timeline.split()[0]) if timeline.split()[0].isdigit() else 6
-    
-    # Build development plan
+
     development_plan = {
         "summary": {
             "current_role": current_role,
@@ -736,12 +682,12 @@ def create_career_development_plan(current_role, target_role, current_skills, ti
         "application_strategy": {}
     }
     
-    # Create milestones
+
     milestone_count = min(months_available, 4)  # Cap at 4 milestones
     for i in range(milestone_count):
         month = (i + 1) * (months_available // milestone_count)
         
-        # Fix: Properly handle the conditional in the list comprehension
+      
         skills_to_mention = []
         if i < len(target_skills.get("technical_skills", [])):
             skills_segment = target_skills.get("technical_skills", [])[i:i+2]
@@ -761,7 +707,7 @@ def create_career_development_plan(current_role, target_role, current_skills, ti
             ]
         })
     
-    # Final milestone - application phase
+ 
     development_plan["milestones"].append({
         "timeline": f"Month {months_available}",
         "goals": [
@@ -774,13 +720,12 @@ def create_career_development_plan(current_role, target_role, current_skills, ti
         ]
     })
     
-    # Skill acquisition plan
+
     development_plan["skill_acquisition_plan"] = {
         "priority_skills": [s["skill"] for s in (target_skills.get("technical_skills", []) + target_skills.get("soft_skills", []))[:3]],
         "learning_resources": get_learning_resources([s["skill"] for s in (target_skills.get("technical_skills", []) + target_skills.get("soft_skills", []))[:3]])
     }
-    
-    # Networking strategy
+
     development_plan["networking_strategy"] = {
         "target_connections": [
             f"Current {target_role} professionals",
@@ -793,8 +738,7 @@ def create_career_development_plan(current_role, target_role, current_skills, ti
             "Request informational interviews"
         ]
     }
-    
-    # Application strategy
+
     development_plan["application_strategy"] = {
         "resume_focus_points": [
             "Highlight newly acquired skills",
@@ -810,7 +754,7 @@ def create_career_development_plan(current_role, target_role, current_skills, ti
     
     return development_plan
 
-# Full analysis endpoint compatible with ResumeAnalysisController's /full endpoint
+
 @app.route("/api/analysis/full", methods=["POST"])
 def full_analysis():
     data = request.json
@@ -818,23 +762,23 @@ def full_analysis():
     job_description = data.get("jobDescription", "").strip()
     job_role = data.get("jobRole", "").strip()
     
-    # Creating unified response format to match Spring Controller expectations
+   
     result = {}
     
     # Always analyze grammar
     result["grammar"] = analyze_grammar(resume_text)
     
-    # ATS analysis if job description is provided
+
     if job_description:
         result["ats"] = analyze_ats(resume_text, job_description)
     
-    # Skills analysis if job role is provided
+
     if job_role:
         result["skills"] = analyze_skills(resume_text, job_role)
     
     return jsonify(result)
 
-# Individual analysis endpoints to match ResumeAnalysisController
+
 @app.route("/api/analysis/grammar", methods=["POST"])
 def grammar_analysis():
     data = request.json
@@ -858,7 +802,6 @@ def skills_analysis():
     result = analyze_skills(resume_text, job_role)
     return jsonify(result)
 
-# Original unified route - kept for backward compatibility
 @app.route("/analyze-resume", methods=["POST"])
 def analyze_resume():
     data = request.json
@@ -867,13 +810,13 @@ def analyze_resume():
     job_description = data.get("job_description", "").strip()
     job_role = data.get("job_role", "").strip()
 
-    # If resume_id is provided, fetch from database
+
     if resume_id:
         resume = fetch_resume(resume_id)
         if resume:
             resume_text = resume.resume_text
 
-    # Skip any analysis with missing required data
+  
     grammar_analysis_result = analyze_grammar(resume_text) if resume_text else {"error": "No resume text provided"}
     ats_analysis_result = analyze_ats(resume_text, job_description) if resume_text and job_description else {"error": "Missing data for ATS analysis"}
     skill_analysis_result = analyze_skills(resume_text, job_role) if resume_text and job_role else {"error": "Missing data for skills analysis"}
@@ -903,18 +846,18 @@ def career_path():
         return jsonify({'error': 'Job role and a non-empty skills list are required'}), 400
 
     try:
-        # Step 1: Predict next roles
+       
         next_roles = predict_next_roles(job_role, skills)
 
-        # Step 2: Suggest skills
+       
         vertical_roles = [r["role"] for r in next_roles.get("vertical_progression", [])]
         recommended_skills = suggest_skills(vertical_roles, skills)
 
-        # Step 3: Learning resources
+       
         skill_list = [s["skill"] for s in recommended_skills.get("technical_skills", [])]
         learning_resources = get_learning_resources(skill_list)
 
-        # Step 4: Career dev plan if target provided
+        
         development_plan = {}
         if target_role:
             development_plan = create_career_development_plan(
@@ -974,7 +917,7 @@ INTERVIEW_QUESTIONS = {
         "How do you define project success?",
         "How do you manage scope creep?"
     ],
-    # Add more roles here
+   
 }
 
 @app.route('/api/interview/questions', methods=['POST'])
@@ -988,10 +931,9 @@ def get_mock_questions():
 
     return jsonify({'questions': questions})
 
-# Load Whisper model once during startup
+
 model = whisper.load_model("base")
 
-# Backend code updates for improved feedback
 
 @app.route('/api/interview/evaluate', methods=['POST'])
 def evaluate_audio_response():
@@ -1025,9 +967,7 @@ def evaluate_audio_response():
         os.remove(audio_path)
 
 def generate_enhanced_feedback(transcript, question, role):
-    """
-    Generate structured feedback for the interview response
-    """
+
     if not transcript.strip():
         return {
             "score": 1,
@@ -1036,7 +976,7 @@ def generate_enhanced_feedback(transcript, question, role):
             "example_answer": get_example_answer(question, role)
         }
     
-    # Analyze the response length
+
     word_count = len(transcript.split())
     if word_count < 15:
         return {
@@ -1047,7 +987,7 @@ def generate_enhanced_feedback(transcript, question, role):
             "example_answer": get_example_answer(question, role)
         }
     
-    # Initialize feedback structure
+
     feedback = {
         "score": 0,
         "strengths": [],
@@ -1055,7 +995,7 @@ def generate_enhanced_feedback(transcript, question, role):
         "example_answer": get_example_answer(question, role)
     }
     
-    # Analyze content (this would be more sophisticated with a real LLM implementation)
+  
     
     # Check for STAR method in behavioral questions
     if any(term in question.lower() for term in ["describe a time", "tell me about", "example of", "experience with"]):
@@ -1127,17 +1067,13 @@ def generate_enhanced_feedback(transcript, question, role):
     if not feedback["areas_to_improve"]:
         feedback["areas_to_improve"].append("Consider structuring your answer more clearly with an introduction, main points, and conclusion.")
     
-    # Cap the score between 1 and 5
+  
     feedback["score"] = max(1, min(feedback["score"], 5))
     
     return feedback
 
 def get_example_answer(question, role):
-    """
-    Return an example strong answer based on the question and role
-    """
-    # This would be expanded with a more comprehensive database of example answers
-    # or generated by a model in a real implementation
+  
     
     examples = {
         "Can you explain the SOLID principles?": 
