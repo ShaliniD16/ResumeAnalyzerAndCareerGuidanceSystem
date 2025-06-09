@@ -8,8 +8,6 @@ import ResumeAnalysisIllustration from "../components/ResumeAnalysisIllustration
 const Home = () => {
   const [activeFeature, setActiveFeature] = useState(0);
  
-  // const { isLoggedIn } = useAuth();
-  // Otherwise, use localStorage directly
   const isLoggedIn = Boolean(localStorage.getItem("token"));
 
   const features = [
