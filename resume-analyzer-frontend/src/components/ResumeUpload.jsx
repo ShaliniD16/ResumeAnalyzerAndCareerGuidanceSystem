@@ -55,7 +55,7 @@ const ResumeUpload = () => {
       // Step 1: Upload resume to Spring Boot backend
       const uploadResponse = await fetch("http://localhost:8080/api/resumes/upload", {
         method: "POST",
-        credentials: "include", // 👈 Important for CORS with allowCredentials
+        credentials: "include",
         body: data,
       });
 
