@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
-  const [email, setEmail] = useState(''); // Changed from username to email to match backend
+  const [email, setEmail] = useState(''); 
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
@@ -11,9 +11,9 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      // Configure axios with proper headers
+      
       const response = await axios.post('http://localhost:8080/api/auth/login', {
-        email, // Send email instead of username to match backend expectation
+        email, 
         password,
       }, {
         headers: {
@@ -21,10 +21,10 @@ const Login = () => {
         }
       });
       
-      // Check if token exists in response
+     
       if (response.data && response.data.token) {
         localStorage.setItem('token', response.data.token);
-        // Set up axios defaults for future requests
+        
         axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`;
         navigate('/dashboard');
       } else {
@@ -41,9 +41,9 @@ const Login = () => {
       <h2>Login</h2>
       <form onSubmit={handleLogin}>
         <div>
-          <label>Email</label> {/* Changed label from Username to Email */}
+          <label>Email</label> 
           <input
-            type="email" // Changed to email type for better validation
+            type="email" 
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
