@@ -31,17 +31,17 @@ public class ResumeController {
             @RequestParam("jobTitle") String jobTitle) {
 
         try {
-            // 1. Save resume and extract text
+            
             Resume savedResume = resumeService.processResume(file, name, email, phone, skills, experience, jobTitle);
 
-            // 2. Prepare and send request to Flask API
+           
             String flaskURL = "http://localhost:5000/analyze-resume";
 
-            // Create the JSON body expected by Flask
+            
             Map<String, Object> requestMap = new HashMap<>();
             requestMap.put("resume_text", savedResume.getResumeText());
-            requestMap.put("job_description", jobTitle);  // Or use a specific job description if available
-            requestMap.put("job_role", jobTitle);  // Using job title as the role
+            requestMap.put("job_description", jobTitle);  
+            requestMap.put("job_role", jobTitle); 
 
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
@@ -50,7 +50,7 @@ public class ResumeController {
             RestTemplate restTemplate = new RestTemplate();
             ResponseEntity<Map> flaskResponse = restTemplate.postForEntity(flaskURL, requestEntity, Map.class);
 
-            // 3. Return Flask response (e.g. ATS results) to frontend
+            
             Map<String, Object> response = new HashMap<>();
             response.put("message", "Resume uploaded and analyzed successfully");
             response.put("analysisResult", flaskResponse.getBody());
