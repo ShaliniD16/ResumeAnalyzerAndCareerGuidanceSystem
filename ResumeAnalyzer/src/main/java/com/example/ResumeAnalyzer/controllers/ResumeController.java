@@ -66,17 +66,17 @@ public class ResumeController {
         }
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<?> getResume(@PathVariable Long id) {
-        try {
-            Resume resume = resumeService.getResumeById(id);
-            if (resume == null) {
-                return ResponseEntity.notFound().build();
-            }
-            return ResponseEntity.ok(resume);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("Error retrieving resume: " + e.getMessage());
-        }
-    }
+    // @GetMapping("/{id}")
+    // public ResponseEntity<?> getResume(@PathVariable Long id) {
+    //     try {
+    //         Resume resume = resumeService.getResumeById(id);
+    //         if (resume == null) {
+    //             return ResponseEntity.notFound().build();
+    //         }
+    //         return ResponseEntity.ok(resume);
+    //     } catch (Exception e) {
+    //         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+    //                 .body("Error retrieving resume: " + e.getMessage());
+    //     }
+    // }
 }
